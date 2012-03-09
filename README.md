@@ -4,11 +4,18 @@
 
 ## Installation
 
-  npm install secure
+      npm install secure
 
 ## Usage
 
+      secure.addResource('Admin');
+      secure.grant("jim", "Admin", "read");
 
+      if (secure.allowed("jim", "Admin", "read")) {
+        // Access granted.
+      } else {
+        // Access denied.
+      }
 
 ## Credits
 [Paul Serby](https://github.com/serby/) follow me on [twitter](http://twitter.com/PabloSerbo)
