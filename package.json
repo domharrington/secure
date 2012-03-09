@@ -1,7 +1,7 @@
 {
   "author": "Paul Serby <paul@serby.net>",
   "name": "serby",
-  "description": "Encapsulates authentication and authorization. Controls if the authorized user can access resources",
+  "description": "Encapsulates authentication and authorization. Controls if the authorized user can access resources.",
   "version": "0.0.1",
   "tags": [],
   "repository": {
@@ -18,7 +18,7 @@
   "dependencies": {
     "mocha": "*",
     "should": "*",
-    "": "*"
+    "underscore": "*"
   },
   "devDependencies": {}
 }
