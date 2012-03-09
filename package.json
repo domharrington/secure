@@ -1,0 +1,24 @@
+{
+	"author": "Paul Serby <paul@serby.net>",
+	"name": "serby",
+	"description": "Encapsulates authentication and authorization. Controls if the authorized user can access resources",
+	"version": "0.0.1",
+	"tags": [],
+	"repository": {
+		"type": "git",
+		"url": "git@github.com:lukewilde/secure"
+	},
+	"main": "",
+	"scripts": {
+		"test": "mocha -r should -R List "
+	},
+	"engines": {
+		"node": ">0.4.0"
+	},
+	"dependencies": {
+		"mocha": "*",
+		"should": "*",
+		"": "*"
+	},
+	"devDependencies": {}
+}
