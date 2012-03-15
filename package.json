@@ -8,7 +8,7 @@
     "type": "git",
     "url": "git@github.com:lukewilde/secure"
   },
-  "main": "lib/accessControl",
+  "main": "lib/accessControlList",
   "scripts": {
     "test": "mocha -r should -R List "
   },
