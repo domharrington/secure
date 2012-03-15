@@ -4,36 +4,45 @@ var mockLogger = {
   }
 };
 
-describe('secure', function() {
-  describe('#authenticate()', function() {
+describe('acl', function() {
+  describe('#allowed()', function() {
 
     it('should permit access to granted resources', function() {
-      secure.addResource('Admin');
-      secure.grant("jim", "Admin", "read");
-      secure.allowed("jim", "Admin", "read").should.equal(true);
+      var acl = require('..').createAccessControlList(mockLogger);
+
+      acl.addResource('Admin');
+      acl.grant("jim", "Admin", "read");
+      acl.allowed("jim", "Admin", "read").should.equal(true);
     });
 
     it('should disallow access to unknown resources', function() {
-      secure.allowed("jim", "Unknown resource", "read").should.equal(true);
+      var acl = require('..').createAccessControlList(mockLogger);
+      acl.allowed("jim", "Unknown resource", "read").should.equal(false);
     });
 
-    it('should disallow access to revoked resources', function() {
-      secure.addResource('Admin');
-      secure.grant("jim", "Admin", "read");
-      secure.revoke("jim", "Admin", "read");
-      secure.allowed("jim", "Admin Ding", "read").should.equal(false);
+
+    // TODO: functionality not implemented.
+    // it('should disallow access to revoked resources', function() {
+    //   var acl = require('..').createAccessControlList(mockLogger);
+    //   acl.addResource('Admin');
+    //   acl.grant("jim", "Admin", "read");
+    //   acl.revoke("jim", "Admin", "read");
+    //   acl.allowed("jim", "Admin", "read").should.equal(false);
+    // });
+
+    // TODO: failing - should it throw error or return false?
+    it('should disallow access to undefined resources when others are defined', function() {
+      var acl = require('..').createAccessControlList(mockLogger);
+      acl.grant("jim", "Admin", "read");
+      acl.allowed("jim", "Unknown resource", "read").should.equal(false);
     });
 
-    it('should disallow access to unknown resources', function() {
-      secure.grant("jim", "Admin", "read");
-      secure.allowed("jim", "Admin Ding", "read").should.equal(false);
-    });
+    it('should disallow access to resources granted to users other than the subject', function() {
+      var acl = require('..').createAccessControlList(mockLogger);
 
-    it('should disallow access to resources granted to other targets', function() {
-      secure.addResource('Admin');
-      secure.grant("jane", "Admin", "read");
-      secure.allowed("jim", "Admin", "read").should.equal(false);
+      acl.addResource('Admin');
+      acl.grant("jane", "Admin", "read");
+      acl.allowed("jim", "Admin", "read").should.equal(false);
     });
-
   });
 });
