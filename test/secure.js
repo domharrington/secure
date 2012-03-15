@@ -1,4 +1,8 @@
-var secure = require('..');
+var mockLogger = {
+  verbose: function() {
+    return null;
+  }
+};
 
 describe('secure', function() {
   describe('#authenticate()', function() {
