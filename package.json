@@ -1,24 +1,30 @@
-{
-  "author": "Paul Serby <paul@serby.net>",
-  "name": "secure",
-  "description": "Encapsulates authentication and authorization. Controls if the authorized user can access resources.",
-  "version": "0.0.1",
-  "tags": ["acl", "access control list", "user", "access control", "role"],
-  "repository": {
-    "type": "git",
-    "url": "git@github.com:lukewilde/secure"
+{ "author": "Dom Harrington <dom@harrington-mail.com>"
+, "name": "secure"
+, "description": "Encapsulates authentication and authorization. Controls if the authorized user can access resources."
+, "version": "0.0.1"
+, "tags":
+  [ "acl"
+  , "access control list"
+  , "user"
+  , "access control"
+  , "role"
+  ]
+, "repository":
+  { "type": "git"
+  , "url": "git@github.com:domharrington/node-secure"
+  }
+, "main": "lib/accessControlList"
+, "scripts":
+  { "test": "mocha -r should"
+  }
+, "engines":
+  { "node": ">0.4.0"
+  }
+, "dependencies":
+  { "underscore": "*"
   },
-  "main": "lib/accessControlList",
-  "scripts": {
-    "test": "mocha -r should"
-  },
-  "engines": {
-    "node": ">0.4.0"
-  },
-  "dependencies": {
-    "mocha": "*",
-    "should": "*",
-    "underscore": "*"
-  },
-  "devDependencies": {}
+  "devDependencies":
+  { "mocha": "*"
+  , "should": "*"
+  }
 }

@@ -1,26 +1,18 @@
-#
+secure - acl for Node.JS
+===========
 
-[![build status](https://secure.travis-ci.org/serby/###.png)](http://travis-ci.org/serby/###)
+[![build status](https://secure.travis-ci.org/domharrington/secure.png)](http://travis-ci.org/domharrington/secure)
 
 ## Installation
 
-      npm install secure
-
 ## Usage
 
-      secure.addResource('Admin');
-      secure.grant("jim", "Admin", "read");
-
-      if (secure.allowed("jim", "Admin", "read")) {
-        // Access granted.
-      } else {
-        // Access denied.
-      }
-
 ## Credits
-[Paul Serby](https://github.com/serby/) follow me on [twitter](http://twitter.com/PabloSerbo)
+[Dom Harrington](https://github.com/domharrington/)
 
-[Luke Wilde](https://github.com/lukewilde/) follow me on [twitter](http://twitter.com/LukeWilde)
+[Paul Serby](https://github.com/serby/)
+
+[Luke Wilde](https://github.com/lukewilde/)
 
 ## Licence
 Licenced under the [New BSD License](http://opensource.org/licenses/bsd-license.php)
