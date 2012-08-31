@@ -325,7 +325,10 @@ function getMockResponse() {
 }
 
 function getUser() {
-  return { name : 'Dom' };
+  return {
+    name : 'Dom',
+    emailAddress: 'dom@harrington-mail.com'
+  };
 }
 
 describe('access-control', function() {
