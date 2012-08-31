@@ -423,4 +423,103 @@ describe('access-control', function() {
     });
 
   });
+
+  describe('#authenticate()', function() {
+
+    function authenticate(credentials, callback) {
+      if (credentials.emailAddress === 'dom@harrington-mail.com') {
+        callback(null, _.extend(getUser(), { authenticationId: 'test-auth-id' }));
+      } else {
+        callback(new Error('Wrong Email and password combination.'));
+      }
+    }
+
+    it('should return an error if the authenticationProvider fails auth', function(done) {
+      var accessControl = getAccessControl({ authenticationProvider: authenticate })
+        ;
+
+      accessControl.authenticate(
+        getMockRequest(),
+        getMockResponse(),
+        { emailAddress: 'fake-user@test.com' },
+        function(error, user) {
+          error.message.should.equal('Wrong Email and password combination.');
+          done();
+        }
+      );
+    });
+
+    it('should return the user if the authenticationProvider succeeds auth', function(done) {
+      var accessControl = getAccessControl({ authenticationProvider: authenticate })
+        , user = getUser()
+        ;
+
+      accessControl.authenticate(
+        getMockRequest(),
+        getMockResponse(),
+        user,
+        function(error, usr) {
+          delete usr.authenticationId;
+          usr.should.eql(user);
+          done();
+        }
+      );
+    });
+
+    it('should create a session if auth succeeds', function(done) {
+      var accessControl = getAccessControl({ authenticationProvider: authenticate })
+        , user = getUser()
+        , request = getMockRequest()
+        ;
+
+      accessControl.authenticate(
+        request,
+        getMockResponse(),
+        user,
+        function(error, usr) {
+          request.session.user.should.eql(usr);
+          done();
+        }
+      );
+    });
+
+    it('should create an auto authentication cookie if `rememberMe` credential is set', function(done) {
+      var accessControl = getAccessControl({ authenticationProvider: authenticate })
+        , user = getUser()
+        , response = getMockResponse()
+        ;
+
+      accessControl.authenticate(
+        getMockRequest(),
+        response,
+        _.extend(user, { rememberMe: true }),
+        function(error, usr) {
+          var cookie = response.getCookie();
+
+          cookie.name.should.equal('userAuthenticationId');
+          cookie.value.should.equal('test-auth-id');
+          done();
+        }
+      );
+    });
+
+    it('should emit an authenticate event with the authed user', function(done) {
+      var accessControl
+        , user = getUser()
+        ;
+
+      accessControl = getAccessControl({
+        authenticationProvider: authenticate
+      });
+
+      accessControl.on('authenticate', function(usr) {
+        delete usr.authenticationId;
+        usr.should.eql(user);
+        done();
+      });
+
+      accessControl.authenticate(getMockRequest(), getMockResponse(), user, emptyFn);
+    });
+
+  });
 });
