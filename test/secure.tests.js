@@ -1,3 +1,6 @@
+var _ = require('underscore')
+  ;
+
 function getAcl(resource) {
   var acl = require('..').createAccessControlList({
     verbose: function() {
@@ -272,6 +275,44 @@ describe('access-control-list', function() {
     });
 
   });
+
+});
+
+var emptyFn = function() {};
+
+function getAccessControl(options) {
+
+  options = options || {};
+
+  _.extend(options, {
+    authenticationProvider: emptyFn,
+    authenticatedAcl: getAcl(),
+    unauthenticatedAcl: getAcl(),
+    logger: {
+      silly: emptyFn,
+      info: emptyFn,
+    }
+  });
+
+  return require('..').createAccessControl(
+    options.authenticationProvider,
+    options.authenticatedAcl,
+    options.unauthenticatedAcl,
+    options.type,
+    options.logger,
+    options.defaultFailure
+  );
+}
+
+function getMockRequest() {
+  return {
+    session: {}
+  };
+}
+
+function getUser() {
+  return { name : 'Dom' };
+}
 
 describe('access-control', function() {
 
