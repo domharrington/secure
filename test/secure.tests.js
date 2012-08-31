@@ -284,7 +284,7 @@ function getAccessControl(options) {
 
   options = options || {};
 
-  _.extend(options, {
+  options = _.extend({
     authenticationProvider: emptyFn,
     authenticatedAcl: getAcl(),
     unauthenticatedAcl: getAcl(),
@@ -292,7 +292,7 @@ function getAccessControl(options) {
       silly: emptyFn,
       info: emptyFn,
     }
-  });
+  }, options);
 
   return require('..').createAccessControl(
     options.authenticationProvider,
