@@ -415,7 +415,7 @@ describe('access-control', function() {
         ;
 
       accessControl.on('session', function(usr) {
-        usr.should.equal(user);
+        usr.should.eql(user);
         done();
       });
 
