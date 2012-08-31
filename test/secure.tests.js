@@ -522,4 +522,15 @@ describe('access-control', function() {
     });
 
   });
+
+  describe('#isAuthenticated()', function() {});
+  describe('#canAutoAuthenticate()', function() {});
+  describe('#setAutoAuthenticationCookie()', function() {});
+  describe('#clearAutoAuthenticationCookie()', function() {});
+  describe('#isAllowed()', function() {});
+  describe('#destroy()', function() {});
+  describe('#setBlockedRequest()', function() {});
+  describe('#getLastBlockedUrl()', function() {});
+  describe('#requiredAccess()', function() {});
+
 });
