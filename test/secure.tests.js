@@ -273,4 +273,41 @@ describe('access-control-list', function() {
 
   });
 
+describe('access-control', function() {
+
+  it('should throw if authenticationProvider is not provided', function() {
+    (function() {
+      require('..').createAccessControl();
+    }).should.throw('authenticationProvider is required and must be a function');
+  });
+
+  it('should error if authenticationProvider is not a function', function() {
+    (function() {
+      require('..').createAccessControl('');
+    }).should.throw('authenticationProvider is required and must be a function');
+  });
+
+  it('should error if authenticatedAcl is not provided', function() {
+    (function() {
+      require('..').createAccessControl(emptyFn);
+    }).should.throw('authenticatedAcl is required and must be an object');
+  });
+
+  it('should error if authenticatedAcl is not an object', function() {
+    (function() {
+      require('..').createAccessControl(emptyFn, '');
+    }).should.throw('authenticatedAcl is required and must be an object');
+  });
+
+  it('should error if unauthenticatedAcl is not provided', function() {
+    (function() {
+      require('..').createAccessControl(emptyFn, {});
+    }).should.throw('unauthenticatedAcl is required and must be an object');
+  });
+
+  it('should error if unauthenticatedAcl is not an object', function() {
+    (function() {
+      require('..').createAccessControl(emptyFn, {}, '');
+    }).should.throw('unauthenticatedAcl is required and must be an object');
+  });
 });
