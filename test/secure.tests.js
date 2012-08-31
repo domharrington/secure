@@ -310,6 +310,20 @@ function getMockRequest() {
   };
 }
 
+function getMockResponse() {
+  var cookie = {};
+
+  return {
+    cookie: function(name, value) {
+      cookie.name = name;
+      cookie.value = value;
+    },
+    getCookie: function() {
+      return cookie;
+    }
+  };
+}
+
 function getUser() {
   return { name : 'Dom' };
 }
