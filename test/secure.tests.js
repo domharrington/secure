@@ -310,4 +310,59 @@ describe('access-control', function() {
       require('..').createAccessControl(emptyFn, {}, '');
     }).should.throw('unauthenticatedAcl is required and must be an object');
   });
+
+  describe('#createSession()', function() {
+
+    it('should add a property to the session which is equal to the accessControl type', function() {
+      var accessControl
+        , type = 'testType'
+        ;
+
+      accessControl = getAccessControl({
+        type: type
+      });
+
+      var request = getMockRequest();
+
+      accessControl.createSession(request, {});
+
+      request.session.hasOwnProperty(type).should.equal(true);
+    });
+
+    it('should add the user to the type property of the session', function() {
+      var accessControl = getAccessControl()
+        , request = getMockRequest()
+        , user = getUser()
+        ;
+
+      accessControl.createSession(request, user);
+
+      request.session.user.should.equal(user);
+    });
+
+    it('should add a type + `JustLoggedIn` property to the session and set it to true', function() {
+      var accessControl = getAccessControl()
+        , request = getMockRequest()
+        ;
+
+      accessControl.createSession(request, {});
+
+      request.session.hasOwnProperty('userJustLoggedIn').should.equal(true);
+      request.session.userJustLoggedIn.should.equal(true);
+    });
+
+    it('should emit a session event with the user', function(done) {
+      var accessControl = getAccessControl()
+        , user = getUser()
+        ;
+
+      accessControl.on('session', function(usr) {
+        usr.should.equal(user);
+        done();
+      });
+
+      accessControl.createSession(getMockRequest(), user);
+    });
+
+  });
 });
