@@ -576,7 +576,27 @@ describe('access-control', function() {
   });
 
   describe('#setAutoAuthenticationCookie()', function() {});
-  describe('#clearAutoAuthenticationCookie()', function() {});
+
+  describe('#clearAutoAuthenticationCookie()', function() {
+
+    it('calls the clearCookie method of the response object', function() {
+      var accessControl = getAccessControl()
+        , called = false
+        ;
+
+      accessControl.clearAutoAuthenticationCookie({
+        // Creating a mock clearCookie function
+        clearCookie: function(name) {
+          name.should.equal('userAuthenticationId');
+          called = true;
+        }
+      });
+
+      called.should.equal(true);
+    });
+
+  });
+
   describe('#isAllowed()', function() {});
   describe('#destroy()', function() {});
   describe('#setBlockedRequest()', function() {});
