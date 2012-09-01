@@ -545,7 +545,36 @@ describe('access-control', function() {
 
   });
 
-  describe('#canAutoAuthenticate()', function() {});
+  describe('#canAutoAuthenticate()', function() {
+
+    it('should return true if a user can auto authenticate', function() {
+      var accessControl = getAccessControl()
+        ;
+
+      accessControl.canAutoAuthenticate({
+        session: {
+          user: {}
+        },
+        cookies: {
+          userAuthenticationId: {}
+        }
+      }).should.equal(true);
+    });
+
+    it('should return false if a user can not auto authenticate', function() {
+      var accessControl = getAccessControl()
+        ;
+
+      accessControl.canAutoAuthenticate({
+        session: {
+          user: {}
+        },
+        cookies: {}
+      }).should.equal(false);
+    });
+
+  });
+
   describe('#setAutoAuthenticationCookie()', function() {});
   describe('#clearAutoAuthenticationCookie()', function() {});
   describe('#isAllowed()', function() {});
