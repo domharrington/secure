@@ -523,7 +523,28 @@ describe('access-control', function() {
 
   });
 
-  describe('#isAuthenticated()', function() {});
+  describe('#isAuthenticated()', function() {
+
+    it('should return true for an authed session', function() {
+      var accessControl = getAccessControl()
+        ;
+
+      accessControl.isAuthenticated({
+        session: {
+          user: {}
+        }
+      }).should.equal(true);
+    });
+
+    it('should return false for an unauthed session', function() {
+      var accessControl = getAccessControl()
+        ;
+
+      accessControl.isAuthenticated(getMockRequest()).should.equal(false);
+    });
+
+  });
+
   describe('#canAutoAuthenticate()', function() {});
   describe('#setAutoAuthenticationCookie()', function() {});
   describe('#clearAutoAuthenticationCookie()', function() {});
