@@ -752,6 +752,97 @@ describe('access-control', function() {
 
   });
 
-  describe('#requiredAccess()', function() {});
+  describe('#requiredAccess()', function() {
+
+    it('should return a function', function() {
+      var accessControl = getAccessControl()
+        ;
+
+      (typeof accessControl.requiredAccess('test', 'test', 'test')).should.equal('function');
+    });
+
+    it('should call next() if the request is allowed', function() {
+      var accessControl
+        , called = false
+        , request = getMockRequest()
+        ;
+
+      accessControl = getAccessControl({
+        authenticatedAcl: {
+          // Mocking an acl allowed function that always returns true
+          allowed: function() {
+            return true;
+          }
+        }
+      });
+
+      request.session.user = {
+        roles: []
+      };
+
+      var middleware = accessControl.requiredAccess('test', 'test', 'test');
+
+      middleware(request, getMockResponse(), function() {
+        called = true;
+      });
+
+      called.should.equal(true);
+    });
+
+    it('should call redirect on the response if failure is a string', function() {
+      var accessControl = getAccessControl()
+        , called = false
+        , response = getMockResponse()
+        , failure = 'test-failure'
+        ;
+
+      // Mocking express' redirect function
+      response.redirect = function(fail) {
+        fail.should.equal(failure);
+        called = true;
+      };
+
+      var middleware = accessControl.requiredAccess('test', 'test', failure);
+
+      middleware(getMockRequest(), response, emptyFn);
+
+      called.should.equal(true);
+    });
+
+    it('should call failure if it is a function', function() {
+      var accessControl = getAccessControl()
+        , called = false
+        ;
+
+      function failure() {
+        called = true;
+      }
+
+      var middleware = accessControl.requiredAccess('test', 'test', failure);
+
+      middleware(getMockRequest(), getMockResponse(), emptyFn);
+
+      called.should.equal(true);
+    });
+
+    it('should call defaultFailure if no failure passed in', function() {
+      var accessControl
+        , called = false
+        ;
+
+      accessControl = getAccessControl({
+        defaultFailure: function() {
+          called = true;
+        }
+      });
+
+      var middleware = accessControl.requiredAccess('test', 'test');
+
+      middleware(getMockRequest(), getMockResponse(), emptyFn);
+
+      called.should.equal(true);
+    });
+
+  });
 
 });
