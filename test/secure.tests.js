@@ -274,6 +274,15 @@ describe('access-control-list', function() {
       }
     });
 
+    it('should allow array of targets to be passed in and return true if any one passes', function() {
+      var acl = getAcl('Admin')
+        ;
+
+      acl.grant('jim', 'Admin', 'read');
+
+      acl.allowed(['fake-target', 'jim'], 'Admin', 'read').should.equal(true);
+    });
+
   });
 
 });
