@@ -496,8 +496,7 @@ describe('access-control', function() {
         function(error, usr) {
           var cookie = response.getCookie();
 
-          cookie.name.should.equal('userAuthenticationId');
-          cookie.value.should.equal('test-auth-id');
+          cookie.should.not.equal({});
           done();
         }
       );
@@ -575,7 +574,25 @@ describe('access-control', function() {
 
   });
 
-  describe('#setAutoAuthenticationCookie()', function() {});
+  describe('#setAutoAuthenticationCookie()', function() {
+
+    it('sets auto authentication cookie on the response using res#cookie()', function() {
+      var accessControl = getAccessControl()
+        , response = getMockResponse()
+        , authId = 'test-auth-id'
+        ;
+
+      accessControl.setAutoAuthenticationCookie(response, {
+        authenticationId: authId
+      });
+
+      var cookie = response.getCookie();
+
+      cookie.name.should.equal('userAuthenticationId');
+      cookie.value.should.equal(authId);
+    });
+
+  });
 
   describe('#clearAutoAuthenticationCookie()', function() {
 
