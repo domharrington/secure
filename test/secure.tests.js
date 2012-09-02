@@ -716,7 +716,6 @@ describe('access-control', function() {
       });
 
       called.should.equal(true);
-
     });
 
   });
