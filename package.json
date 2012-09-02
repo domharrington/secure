@@ -1,6 +1,6 @@
 { "author": "Dom Harrington <dom@harrington-mail.com>"
 , "name": "secure"
-, "description": "Encapsulates authentication and authorization. Controls if the authorized user can access resources."
+, "description": "ACL for Node.JS. Including authentication and express middleware for authorization."
 , "version": "0.0.1"
 , "tags":
   [ "acl"
@@ -11,9 +11,9 @@
   ]
 , "repository":
   { "type": "git"
-  , "url": "git@github.com:domharrington/node-secure"
+  , "url": "git@github.com:domharrington/secure"
   }
-, "main": "lib/accessControlList"
+, "main": "index"
 , "scripts":
   { "test": "mocha -r should"
   }
