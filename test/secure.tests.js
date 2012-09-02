@@ -674,7 +674,53 @@ describe('access-control', function() {
 
   });
 
-  describe('#destroy()', function() {});
+  describe('#destroy()', function() {
+
+    it('should emit a destroy event', function(done) {
+      var accessControl = getAccessControl()
+        , user = getUser()
+        , response = getMockResponse()
+        ;
+
+      accessControl.on('destroy', function(usr) {
+        done();
+      });
+
+      accessControl.destroy(getMockRequest(), response);
+    });
+
+    it('should delete the user from the session', function() {
+      var accessControl = getAccessControl()
+        , request = getMockRequest()
+        ;
+
+      request.session.user = {
+        a: 'b',
+        c: 'd'
+      };
+
+      accessControl.destroy(request, getMockResponse());
+
+      request.session.should.eql({});
+    });
+
+    it('should call clearAutoAuthenticationCookie()', function() {
+      var accessControl = getAccessControl()
+        , called = false
+        ;
+
+      accessControl.destroy(getMockRequest(), {
+        clearCookie: function() {
+          called = true;
+        }
+      });
+
+      called.should.equal(true);
+
+    });
+
+  });
+
   describe('#setBlockedRequest()', function() {});
   describe('#getLastBlockedUrl()', function() {});
   describe('#requiredAccess()', function() {});
