@@ -614,7 +614,65 @@ describe('access-control', function() {
 
   });
 
-  describe('#isAllowed()', function() {});
+  describe('#isAllowed()', function() {
+
+    it('should return false if session variable isnt set', function() {
+      var accessControl = getAccessControl()
+        ;
+
+      accessControl.isAllowed(getMockRequest(), 'test', 'test').should.equal(false);
+    });
+
+    it('should use authenticatedAcl if session has a roles property', function() {
+      var accessControl
+        , request = getMockRequest()
+        , called = false
+        ;
+
+      accessControl = getAccessControl({
+        authenticatedAcl: {
+          allowed: function() {
+            called = true;
+          }
+        }
+      });
+
+      request.session = {
+        user: {
+          roles: []
+        }
+      };
+
+      accessControl.isAllowed(request, 'test', 'test');
+
+      called.should.equal(true);
+    });
+
+    it('should use unauthenticatedAcl if session doesn\'t have a roles property', function() {
+      var accessControl
+        , request = getMockRequest()
+        , called = false
+        ;
+
+      accessControl = getAccessControl({
+        unauthenticatedAcl: {
+          allowed: function() {
+            called = true;
+          }
+        }
+      });
+
+      request.session = {
+        user: {}
+      };
+
+      accessControl.isAllowed(request, 'test', 'test');
+
+      called.should.equal(true);
+    });
+
+  });
+
   describe('#destroy()', function() {});
   describe('#setBlockedRequest()', function() {});
   describe('#getLastBlockedUrl()', function() {});
