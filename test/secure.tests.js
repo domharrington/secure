@@ -320,7 +320,8 @@ function getMockResponse() {
     },
     getCookie: function() {
       return cookie;
-    }
+    },
+    clearCookie: emptyFn
   };
 }
 
