@@ -720,8 +720,38 @@ describe('access-control', function() {
 
   });
 
-  describe('#setBlockedRequest()', function() {});
-  describe('#getLastBlockedUrl()', function() {});
+  describe('#setBlockedRequest()', function() {
+
+    it('should add a type + `LastUrl` property to the session', function() {
+      var accessControl = getAccessControl()
+        , request = getMockRequest()
+        , url = '/test-url'
+        ;
+
+      request.url = url;
+
+      accessControl.setBlockedRequest(request);
+
+      request.session.userLastUrl.should.equal(url);
+    });
+
+  });
+
+  describe('#getLastBlockedUrl()', function() {
+
+    it('should retrieve the type + `LastUrl` from the session', function() {
+      var accessControl = getAccessControl()
+        , request = getMockRequest()
+        , url = '/test-url'
+        ;
+
+      request.session.userLastUrl = url;
+
+      accessControl.getLastBlockedUrl(request).should.equal(url);
+    });
+
+  });
+
   describe('#requiredAccess()', function() {});
 
 });
