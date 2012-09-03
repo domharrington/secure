@@ -134,7 +134,7 @@ describe('access-control-list', function() {
 
       (function() {
         acl.grant('target', fakeResource, 'action');
-      }).should.throw('Unknown resource: ' + fakeResource);
+      }).should.throwError('Unknown resource: ' + fakeResource);
     });
 
     it('should throw if action is unknown');
@@ -174,7 +174,7 @@ describe('access-control-list', function() {
 
       (function() {
         acl.revoke('target', fakeResource, 'action');
-      }).should.throw('Unknown resource: ' + fakeResource);
+      }).should.throwError('Unknown resource: ' + fakeResource);
     });
 
     it('should throw if action is unknown', function() {
@@ -185,7 +185,7 @@ describe('access-control-list', function() {
 
       (function() {
         acl.revoke('target', resource, unknownAction);
-      }).should.throw('Unknown action: ' + unknownAction);
+      }).should.throwError('Unknown action: ' + unknownAction);
     });
 
   });
@@ -299,7 +299,7 @@ function getAccessControl(options) {
     unauthenticatedAcl: getAcl(),
     logger: {
       silly: emptyFn,
-      info: emptyFn,
+      info: emptyFn
     }
   }, options);
 
@@ -346,37 +346,37 @@ describe('access-control', function() {
   it('should throw if authenticationProvider is not provided', function() {
     (function() {
       require('..').createAccessControl();
-    }).should.throw('authenticationProvider is required and must be a function');
+    }).should.throwError('authenticationProvider is required and must be a function');
   });
 
   it('should error if authenticationProvider is not a function', function() {
     (function() {
       require('..').createAccessControl('');
-    }).should.throw('authenticationProvider is required and must be a function');
+    }).should.throwError('authenticationProvider is required and must be a function');
   });
 
   it('should error if authenticatedAcl is not provided', function() {
     (function() {
       require('..').createAccessControl(emptyFn);
-    }).should.throw('authenticatedAcl is required and must be an object');
+    }).should.throwError('authenticatedAcl is required and must be an object');
   });
 
   it('should error if authenticatedAcl is not an object', function() {
     (function() {
       require('..').createAccessControl(emptyFn, '');
-    }).should.throw('authenticatedAcl is required and must be an object');
+    }).should.throwError('authenticatedAcl is required and must be an object');
   });
 
   it('should error if unauthenticatedAcl is not provided', function() {
     (function() {
       require('..').createAccessControl(emptyFn, {});
-    }).should.throw('unauthenticatedAcl is required and must be an object');
+    }).should.throwError('unauthenticatedAcl is required and must be an object');
   });
 
   it('should error if unauthenticatedAcl is not an object', function() {
     (function() {
       require('..').createAccessControl(emptyFn, {}, '');
-    }).should.throw('unauthenticatedAcl is required and must be an object');
+    }).should.throwError('unauthenticatedAcl is required and must be an object');
   });
 
   describe('#createSession()', function() {
