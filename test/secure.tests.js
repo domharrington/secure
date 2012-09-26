@@ -2,7 +2,7 @@ var _ = require('lodash')
   ;
 
 function getAcl(resource) {
-  var acl = require('..').createAccessControlList({
+  var acl = require('../access-control-list')({
     verbose: function() {
       return null;
     }
@@ -303,7 +303,7 @@ function getAccessControl(options) {
     }
   }, options);
 
-  return require('..').createAccessControl(
+  return require('../access-control')(
     options.authenticationProvider,
     options.authenticatedAcl,
     options.unauthenticatedAcl,
@@ -345,37 +345,37 @@ describe('access-control', function() {
 
   it('should throw if authenticationProvider is not provided', function() {
     (function() {
-      require('..').createAccessControl();
+      require('../access-control')();
     }).should.throwError('authenticationProvider is required and must be a function');
   });
 
   it('should error if authenticationProvider is not a function', function() {
     (function() {
-      require('..').createAccessControl('');
+      require('../access-control')('');
     }).should.throwError('authenticationProvider is required and must be a function');
   });
 
   it('should error if authenticatedAcl is not provided', function() {
     (function() {
-      require('..').createAccessControl(emptyFn);
+      require('../access-control')(emptyFn);
     }).should.throwError('authenticatedAcl is required and must be an object');
   });
 
   it('should error if authenticatedAcl is not an object', function() {
     (function() {
-      require('..').createAccessControl(emptyFn, '');
+      require('../access-control')(emptyFn, '');
     }).should.throwError('authenticatedAcl is required and must be an object');
   });
 
   it('should error if unauthenticatedAcl is not provided', function() {
     (function() {
-      require('..').createAccessControl(emptyFn, {});
+      require('../access-control')(emptyFn, {});
     }).should.throwError('unauthenticatedAcl is required and must be an object');
   });
 
   it('should error if unauthenticatedAcl is not an object', function() {
     (function() {
-      require('..').createAccessControl(emptyFn, {}, '');
+      require('../access-control')(emptyFn, {}, '');
     }).should.throwError('unauthenticatedAcl is required and must be an object');
   });
 
