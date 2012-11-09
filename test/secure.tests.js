@@ -298,7 +298,7 @@ function getAccessControl(options) {
     authenticatedAcl: getAcl(),
     unauthenticatedAcl: getAcl(),
     logger: {
-      silly: emptyFn,
+      debug: emptyFn,
       info: emptyFn
     }
   }, options);
