@@ -3,7 +3,7 @@ var _ = require('lodash')
 
 function getAcl(resource) {
   var acl = require('../access-control-list')({
-    verbose: function() {
+    debug: function() {
       return null;
     }
   });
