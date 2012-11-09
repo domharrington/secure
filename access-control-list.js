@@ -12,7 +12,7 @@ module.exports = function(logger) {
 
   // Provides the console as a default logger
   logger = logger || {
-    verbose: console.log
+    debug: console.log
   };
 
   /**
@@ -60,7 +60,7 @@ module.exports = function(logger) {
         actions[action] = [];
       });
 
-      logger.verbose('Adding resource \'' + resource + '\' to access control list');
+      logger.debug('Adding resource \'' + resource + '\' to access control list');
 
       // Adding the resource to the ACL
       acl[resource] = {
@@ -72,7 +72,7 @@ module.exports = function(logger) {
       }
 
     } else {
-      logger.verbose('Resource \'' + resource + '\' already added');
+      logger.debug('Resource \'' + resource + '\' already added');
     }
   }
 
