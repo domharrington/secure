@@ -3,7 +3,7 @@ var _ = require('lodash')
 
 function getAcl(resource) {
   var acl = require('../access-control-list')({
-    verbose: function() {
+    debug: function() {
       return null;
     }
   });
@@ -298,7 +298,7 @@ function getAccessControl(options) {
     authenticatedAcl: getAcl(),
     unauthenticatedAcl: getAcl(),
     logger: {
-      silly: emptyFn,
+      debug: emptyFn,
       info: emptyFn
     }
   }, options);

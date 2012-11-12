@@ -176,7 +176,7 @@ module.exports = function(authenticationProvider, authenticatedAcl, unauthentica
       if (isAllowed(req, resource, action)) {
         next();
       } else {
-        logger.silly('Unauthorized: ' + resource + ' / ' + action);
+        logger.debug('Unauthorized: ' + resource + ' / ' + action);
         switch (typeof failure) {
           case 'string':
             return res.redirect(failure);
