@@ -452,7 +452,7 @@ describe('access-control', function() {
         getMockRequest(),
         getMockResponse(),
         { emailAddress: 'fake-user@test.com' },
-        function(error, user) {
+        function(error) {
           error.message.should.equal('Wrong Email and password combination.');
           done();
         }
@@ -503,7 +503,7 @@ describe('access-control', function() {
         getMockRequest(),
         response,
         _.extend(user, { rememberMe: true }),
-        function(error, usr) {
+        function() {
           var cookie = response.getCookie();
 
           cookie.should.not.equal({});
