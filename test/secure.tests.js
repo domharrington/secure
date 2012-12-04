@@ -687,11 +687,10 @@ describe('access-control', function() {
 
     it('should emit a destroy event', function(done) {
       var accessControl = getAccessControl()
-        , user = getUser()
         , response = getMockResponse()
         ;
 
-      accessControl.on('destroy', function(usr) {
+      accessControl.on('destroy', function() {
         done();
       });
 
