@@ -9,6 +9,6 @@ lint-changed:
 	@jshint `git status --porcelain | sed -e "s/^...//g"`
 
 lint:
-	@jshint lib test
+	@jshint access-control.js access-control-list.js test
 
 .PHONY: default test lint lint-changed
