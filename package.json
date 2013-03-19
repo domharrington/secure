@@ -1,7 +1,7 @@
 { "author": "Dom Harrington <dom@harrington-mail.com>"
 , "name": "secure"
 , "description": "ACL for Node.JS. Including authentication and express middleware for authorization."
-, "version": "0.1.1"
+, "version": "0.1.2"
 , "tags":
   [ "acl"
   , "access control list"
