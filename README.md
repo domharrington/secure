@@ -1,5 +1,5 @@
-secure - ACL for Node.JS. Including authentication and express middleware for authorization.
-===========
+# secure
+ACL for Node.JS. Including authentication and express middleware for authorization.
 
 [![build status](https://secure.travis-ci.org/domharrington/secure.png)](http://travis-ci.org/domharrington/secure)
 
