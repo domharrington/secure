@@ -97,13 +97,9 @@ describe('access-control-list', function() {
       }
 
       acl.clearGrants();
-
-      Object.keys(acl.acl).forEach(function(resource) {
-        Object.keys(acl.acl[resource].actions).forEach(function(action) {
-          acl.acl[resource][action].length.should.equal(0);
-        });
-      });
-
+      acl.allowed('1-target', '1', 'read').should.equal(false)
+      acl.allowed('50-target', '50', 'read').should.equal(false)
+      acl.allowed('99-target', '99', 'read').should.equal(false)
     });
 
   });
