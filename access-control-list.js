@@ -23,7 +23,7 @@ module.exports = function(logger) {
   function clearGrants() {
     Object.keys(acl).forEach(function(resource) {
       Object.keys(acl[resource].actions).forEach(function(action) {
-        acl[resource][action] = [];
+        acl[resource].actions[action] = [];
       });
     });
   }
