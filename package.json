@@ -14,6 +14,9 @@
     "type": "git",
     "url": "git@github.com:domharrington/secure"
   },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org"
+  },
   "main": "index",
   "scripts": {
     "test": "mocha -r should"
