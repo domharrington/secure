@@ -1,30 +1,31 @@
-{ "author": "Dom Harrington <dom@harrington-mail.com>"
-, "name": "secure"
-, "description": "ACL for Node.JS. Including authentication and express middleware for authorization."
-, "version": "0.1.2"
-, "tags":
-  [ "acl"
-  , "access control list"
-  , "user"
-  , "access control"
-  , "role"
-  ]
-, "repository":
-  { "type": "git"
-  , "url": "git@github.com:domharrington/secure"
-  }
-, "main": "index"
-, "scripts":
-  { "test": "mocha -r should"
-  }
-, "engines":
-  { "node": ">0.6.0"
-  }
-, "dependencies":
-  { "lodash": "0.9.0"
+{
+  "author": "Dom Harrington <dom@harrington-mail.com>",
+  "name": "secure",
+  "description": "ACL for Node.JS. Including authentication and express middleware for authorization.",
+  "version": "0.1.3",
+  "tags": [
+    "acl",
+    "access control list",
+    "user",
+    "access control",
+    "role"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:domharrington/secure"
   },
-  "devDependencies":
-  { "mocha": "*"
-  , "should": "*"
+  "main": "index",
+  "scripts": {
+    "test": "mocha -r should"
+  },
+  "engines": {
+    "node": ">0.6.0"
+  },
+  "dependencies": {
+    "lodash": "0.9.0"
+  },
+  "devDependencies": {
+    "mocha": "*",
+    "should": "*"
   }
 }
