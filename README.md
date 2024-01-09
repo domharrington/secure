@@ -1,7 +1,7 @@
 # secure
 ACL for Node.JS. Including authentication and express middleware for authorization.
 
-[![build status](https://secure.travis-ci.org/domharrington/secure.png)](http://travis-ci.org/domharrington/secure)
+[![CI](https://github.com/clocklimited/secure/actions/workflows/ci.yml/badge.svg?branch=master)](https://github.com/clocklimited/secure/actions/workflows/ci.yml)
 
 ## Installation
 
