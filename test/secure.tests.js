@@ -1,4 +1,4 @@
-var _ = require('lodash')
+var assignIn = require('lodash/assignIn')
   ;
 
 function getAcl(resource) {
@@ -289,7 +289,7 @@ function getAccessControl(options) {
 
   options = options || {};
 
-  options = _.extend({
+  options = assignIn({
     authenticationProvider: emptyFn,
     authenticatedAcl: getAcl(),
     unauthenticatedAcl: getAcl(),
@@ -434,7 +434,7 @@ describe('access-control', function() {
 
     function authenticate(credentials, callback) {
       if (credentials.emailAddress === 'dom@harrington-mail.com') {
-        callback(null, _.extend(getUser(), { authenticationId: 'test-auth-id' }));
+        callback(null, assignIn(getUser(), { authenticationId: 'test-auth-id' }));
       } else {
         callback(new Error('Wrong Email and password combination.'));
       }
@@ -498,7 +498,7 @@ describe('access-control', function() {
       accessControl.authenticate(
         getMockRequest(),
         response,
-        _.extend(user, { rememberMe: true }),
+        assignIn(user, { rememberMe: true }),
         function() {
           var cookie = response.getCookie();
 

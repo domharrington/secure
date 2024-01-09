@@ -1,4 +1,4 @@
-var _ = require('lodash')
+var assignIn = require('lodash/assignIn')
   ;
 
 module.exports = function(logger) {
@@ -46,7 +46,7 @@ module.exports = function(logger) {
         actions: ['create', 'read', 'update', 'delete', '*']
       };
 
-      _.extend(options, resourceOptions);
+      assignIn(options, resourceOptions);
 
       if (!Array.isArray(options.actions)) {
         throw new TypeError('actionList is excepted to be an array of action ' +

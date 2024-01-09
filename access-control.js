@@ -1,5 +1,5 @@
 var events = require('events')
-  , _ = require('lodash')
+  , assignIn = require('lodash/assignIn')
   ;
 
 /**
@@ -224,7 +224,7 @@ module.exports = function(authenticationProvider, authenticatedAcl, unauthentica
     return req.session[type + 'LastUrl'];
   }
 
-  return _.extend(self, {
+  return assignIn(self, {
     createSession: createSession,
     authenticate: authenticate,
     isAuthenticated: isAuthenticated,
